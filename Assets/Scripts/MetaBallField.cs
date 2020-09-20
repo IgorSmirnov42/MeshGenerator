@@ -35,6 +35,35 @@ public class MetaBallField
 
         return f - 1;
     }
+
+    public FieldBorders Borders()
+    {
+        float minX = _ballPositions.Select(b => b.x).Min() - 2 * BallRadius;
+        float maxX = _ballPositions.Select(b => b.x).Max() + 2 * BallRadius;
+        float minY = _ballPositions.Select(b => b.y).Min() - 2 * BallRadius;
+        float maxY = _ballPositions.Select(b => b.y).Max() + 2 * BallRadius;
+        float minZ = _ballPositions.Select(b => b.z).Min() - 2 * BallRadius;
+        float maxZ = _ballPositions.Select(b => b.z).Max() + 2 * BallRadius;
+        return new FieldBorders(minX, minY, minZ, maxX, maxY, maxZ);
+    }
     
-    
+    public readonly struct FieldBorders
+    {
+        public FieldBorders(float minX, float minY, float minZ, float maxX, float maxY, float maxZ)
+        {
+            MinX = minX;
+            MinY = minY;
+            MinZ = minZ;
+            MaxX = maxX;
+            MaxY = maxY;
+            MaxZ = maxZ;
+        }
+
+        public float MinX { get; }
+        public float MinY { get; }
+        public float MinZ { get; }
+        public float MaxX { get; }
+        public float MaxY { get; }
+        public float MaxZ { get; }
+    }
 }
